@@ -12,7 +12,13 @@ const getTableData = async (startDate, endDate) => {
         }
     }
 
-    pipeline.push(match)
+    const sort = {
+        $sort: {
+            date: -1
+        }
+    }
+
+    pipeline.push(match, sort)
 
     return await exampleToolModel.aggregate(pipeline).exec()
 
